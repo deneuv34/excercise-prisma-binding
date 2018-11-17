@@ -8,7 +8,7 @@ import { UserParent } from './User';
 export const Mutation = {
   signup: async (parent: any, args: UserParent, ctx: any, info: any) => {
     const password = await hash(args.password, 10)
-    const user = await ctx.bindings.mutation.createUser({
+    const user = await ctx.binding.mutation.createUser({
       data: {
         ...args,
         password,
@@ -19,12 +19,16 @@ export const Mutation = {
 
     return {
       token,
-      user: await ctx.bindings.query.user({ id: user.id }, info),
+      user: await ctx.binding.query.user({
+        where: {
+          id: user.id
+        }
+      }),
     }
   },
 
   login: async (parent: any, obj: { email: any, password: any }, ctx: any, info: any) => {
-    const user = await ctx.bindings.mutation.user({
+    const user = await ctx.binding.mutation.user({
       data: {
         email: obj.email,
       }
@@ -39,7 +43,7 @@ export const Mutation = {
 
     return {
       token,
-      user: await ctx.bindings.query.user({
+      user: await ctx.binding.query.user({
         where: { id: user.id }
       }),
     }
