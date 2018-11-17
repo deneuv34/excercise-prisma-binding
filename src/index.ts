@@ -1,5 +1,5 @@
 import { GraphQLServer } from 'graphql-yoga'
-import { Prisma } from './generated/prisma-client'
+import { Prisma, prisma } from './generated/prisma-client'
 import { resolvers } from './resolvers'
 import { prismaBinding } from './prisma-binding';
 
@@ -14,8 +14,9 @@ const server = new GraphQLServer({
   resolvers: resolvers as any,
   context: {
     binding: prismaBinding,
+    db: prisma,
   }
-})
+} as any)
 
 server.start(({ port }) =>
   console.log(`Server is running on http://localhost:${port}`),

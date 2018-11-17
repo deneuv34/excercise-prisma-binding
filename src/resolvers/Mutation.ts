@@ -13,7 +13,7 @@ export const Mutation = {
         ...args,
         password,
       }
-    }, info)
+    })
 
     const token = sign({ userId: user.id }, process.env.APP_SECRET ? process.env.APP_SECRET : "secret")
 
@@ -28,7 +28,7 @@ export const Mutation = {
       data: {
         email: obj.email,
       }
-    }, info)
+    })
     const valid = await compare(obj.password, user ? user.password : '')
 
     if (!valid || !user) {
@@ -41,7 +41,7 @@ export const Mutation = {
       token,
       user: await ctx.bindings.query.user({
         where: { id: user.id }
-      }, info),
+      }),
     }
   },
 }

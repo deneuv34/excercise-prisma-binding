@@ -3,5 +3,6 @@ import { typeDefs } from './generated/prisma-client/prisma-schema'
 
 export const prismaBinding = new Prisma({
   typeDefs,
-  endpoint: 'http://localhost:4466',
+  endpoint: process.env.PRISMA_ENDPOINT!,
+  secret: process.env.PRISMA_SECRET!,
 })
