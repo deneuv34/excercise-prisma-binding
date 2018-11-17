@@ -1,6 +1,7 @@
 import { GraphQLServer } from 'graphql-yoga'
 import { Prisma } from './generated/prisma-client'
 import { resolvers } from './resolvers'
+import { prismaBinding } from './prisma-binding';
 
 const db = new Prisma({
   endpoint: process.env.PRISMA_ENDPOINT!,
@@ -11,7 +12,9 @@ const db = new Prisma({
 const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',
   resolvers: resolvers as any,
-  context: req => ({ ...req, db }),
+  context: {
+    binding: prismaBinding,
+  }
 })
 
 server.start(({ port }) =>

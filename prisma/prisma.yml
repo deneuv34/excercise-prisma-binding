@@ -11,8 +11,8 @@ datamodel: datamodel.graphql
 secret: ${env:PRISMA_SECRET}
 
 # Defines how to seed data to the database upon the initial deploy.
-seed:
-  import: seed.graphql
+# seed:
+#   import: seed.graphql
 
 generate:
   - generator: typescript-client

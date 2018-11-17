@@ -7,7 +7,7 @@ import { AuthPayload } from './AuthPayload'
 import { MutationResult } from './MutationResult'
 import { User } from './User'
 
-export const resolvers: IResolvers<TypeMap> = {
+export const resolvers = {
   Query,
   Mutation,
   AuthPayload,
